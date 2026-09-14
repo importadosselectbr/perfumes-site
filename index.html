@@ -6,31 +6,223 @@
     <title>@importados.selectbr — Perfumes Árabes de Luxo</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
-        body{background:linear-gradient(135deg,#1a1a2e,#16213f);color:#fff;min-height:100vh;padding:20px}
-        .container{max-width:1200px;margin:0 auto}
-        header{text-align:center;padding:40px 0;margin-bottom:30px;border-bottom:1px solid rgba(212,175,55,0.3)}
-        h1{font-size:2.5rem;color:#d4af37;margin-bottom:10px}
-        .sub{color:#c9c9c9;font-size:1.1rem}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px}
-        .card{background:rgba(255,255,255,0.05);border-radius:16px;overflow:hidden;border:1px solid rgba(212,175,55,0.2);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer}
-        .card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(212,175,55,0.2)}
-        .card-img{width:100%;height:220px;object-fit:cover;background:#222}
-        .card-body{padding:20px}
-        .card h2{font-size:1.1rem;color:#d4af37;margin-bottom:8px;line-height:1.4}
-        .card p{font-size:0.9rem;color:#ccc;margin-bottom:5px}
-        .price{font-size:1.4rem;font-weight:bold;color:#fff;margin:10px 0}
-        .btn{display:inline-block;width:100%;padding:12px;background:linear-gradient(90deg,#d4af37,#f4d03f);color:#000;font-weight:bold;text-align:center;border-radius:8px;text-decoration:none;transition:0.3s}
-        .btn:hover{opacity:0.9}
-        footer{text-align:center;margin-top:50px;padding:30px;color:#888;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.1)}
-        .social{margin-top:15px}
-        .social a{color:#d4af37;margin:0 10px;text-decoration:none}
-        @media(max-width:768px){.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.card-img{height:180px}}
+        
+        /* === FUNDO BASE === */
+        body {
+            background: linear-gradient(135deg, #0f0f23, #1a1a3a, #12122f);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* === DECORAÇÃO ÁRABE — FUNDO === */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212,175,55,0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212,175,55,0.03) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255,215,0,0.02) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Padrão geométrico sutil repetido */
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v2H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Brilhos luminosos estilo lâmpada árabe */
+        .glow-1, .glow-2, .glow-3, .glow-4 {
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,0.12), transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+        .glow-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .glow-2 { top: 60%; right: 5%; animation-delay: 2s; }
+        .glow-3 { bottom: 10%; left: 30%; animation-delay: 4s; }
+        .glow-4 { top: 30%; right: 30%; animation-delay: 6s; }
+
+        /* Animação suave dos brilhos */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-20px) scale(1.1); opacity: 0.9; }
+        }
+
+        /* Cantos decorativos estilo árabe */
+        .corner-tl, .corner-tr, .corner-bl, .corner-br {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(212,175,55,0.25);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        /* === CONTEÚDO — FICA ACIMA DO FUNDO === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(212,175,55,0.3);
+            letter-spacing: 2px;
+        }
+        .sub {
+            color: #e0c97f;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.25);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.2);
+            border-color: rgba(212,175,55,0.5);
+        }
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: rgba(0,0,0,0.3);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            color: #d4af37;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+        .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #f4d03f;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(244,208,63,0.2);
+        }
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #d4af37, #f4d03f, #d4af37);
+            background-size: 200% 100%;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(212,175,55,0.4);
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(212,175,55,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .social {
+            margin-top: 15px;
+        }
+        .social a {
+            color: #d4af37;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .social a:hover {
+            color: #f4d03f;
+            text-shadow: 0 0 8px rgba(212,175,55,0.4);
+        }
+        @media(max-width: 768px) {
+            .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .card-img { height: 180px; }
+            h1 { font-size: 1.8rem; }
+            .glow-1, .glow-2, .glow-3, .glow-4 { width: 150px; height: 150px; }
+        }
     </style>
 </head>
 <body>
+    <!-- === ELEMENTOS DECORATIVOS ÁRABES === -->
+    <div class="pattern-overlay"></div>
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+    <div class="glow-3"></div>
+    <div class="glow-4"></div>
+    <div class="corner-tl"></div>
+    <div class="corner-tr"></div>
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+
+    <!-- === CONTEÚDO DO SITE === -->
     <div class="container">
         <header>
-            <h1>✨ @importados.selectbr</h1>
+            <h1>✨ @importados.selectbr ✨</h1>
             <p class="sub">O Luxo Árabe em Cada Essência</p>
         </header>
 
